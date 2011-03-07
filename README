@@ -1,0 +1,15 @@
+# uploading file using nginx paperclip protected
+
+# sudo chown -R www-data:www-data 
+
+Nginx with passenger with upload module
+# http://www.grid.net.ru/nginx/upload.en.html download upload module for nginx
+ on installing passenger-install-nginx-module add upload module path
+ 
+ if you are configure with sorce code you can refer http://www.grid.net.ru/nginx/upload.en.html
+check my nginx.conf.sample
+
+
+# For converting into mp4
+start beanstalkd
+start stalk app/models/encode_job.rb

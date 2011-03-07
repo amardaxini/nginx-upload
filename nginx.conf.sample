@@ -1,0 +1,26 @@
+server {
+      listen 8081;
+      server_name video.local;
+      root /home/amar/projects/rails3/nginx-app/video_share/public;  
+      passenger_enabled on;
+      client_max_body_size 0;
+      rails_env development;
+			location /attachmets {
+			alias /home/amar/projects/rails3/nginx-app/video_share/attachments;
+			internal;
+			}
+			location /videos/create {
+				 upload_pass @fast_upload_endpoint;
+				 upload_store  /home/amar/projects/rails3/nginx-app/video_share/temp_files/;
+				 upload_store_access user:rw group:rw all:r;
+				 upload_set_form_field video[asset][original_name] "$upload_file_name";
+				 upload_set_form_field video[asset][content_type] "$upload_content_type";
+				 upload_set_form_field video[asset][filepath] "$upload_tmp_path";
+				 upload_set_form_field video[name] "$upload_file_name";
+				 upload_pass_form_field "^id$|^authenticity_token$|^format$";
+				 upload_cleanup 400 404 499 500-505;
+			 }
+ 			location @fast_upload_endpoint {
+				passenger_enabled on;  # or this could be your mongrel/thin backend
+			}   
+    }
