@@ -3,12 +3,14 @@
 <table class="listing">
   <tr>
     <th>Name</th>
-    <th>Download</th>
+    <th>Description</th>
+    <th>Destroy</th>
   </tr>
 
 <% @videos.each do |video| %>
   <tr>
     <td><%=link_to video.name,download_video_path(video) %></td>
+    <td><%=video.description %></td>
     <td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
