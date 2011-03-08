@@ -24,6 +24,7 @@ class Video < ActiveRecord::Base
       self.asset_file_name = asset["original_name"]
       self.asset_content_type = asset["content_type"]
       self.name = video["name"]
+      self.description = video["description"]
     end
   end    
 

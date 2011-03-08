@@ -21,7 +21,8 @@ class VideosController < ApplicationController
   
     @video = Video.new
     # FOR NGINX
-    @video.set_nginx_video(params[:video])
+   puts params
+    @video.set_nginx_video(params)
     respond_to do |format|
       if @video.save
         puts @video.temp_file_path
@@ -52,6 +53,6 @@ class VideosController < ApplicationController
    response.headers['X-Accel-Redirect'] = "/attachments"+@video.asset.url.split("?").first
    response.headers['Content-Type']  = @video.asset_content_type
    response.headers['Content-Disposition'] = "attachment;filename=#{@video.asset_file_name}"
-	 redirect_to video_url(@video)
+   redirect_to video_url(@video)
   end
 end

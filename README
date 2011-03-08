@@ -10,6 +10,7 @@ Nginx with passenger with upload module
 check my nginx.conf.sample
 
 
+
 # For converting into mp4
 start beanstalkd
 start stalk app/models/encode_job.rb
