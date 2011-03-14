@@ -11,6 +11,7 @@ class EncodeVideo
 		#ffmpeg -i input.wmv -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -vpre slow -crf 22 -threads 0 output.mp4
 		command ="#{FFMPEG_PATH} -i #{file_name} -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -vpre slow -crf 22 -threads 0  #{file_name}.mp4"
 		system(command)
+		
 	end
 
 	def self.convert_to_ogg(file_name)

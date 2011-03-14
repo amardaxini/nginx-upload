@@ -31,13 +31,14 @@ class Video < ActiveRecord::Base
   # clean tmp directory used and set new param
   def move_to_path
    if File.exist?(self.asset.path)
-    #MOve to path
+    ##MOve to path
     paper_clip_path = "#{Rails.root}/attachments/videos/#{self.id}/"
     FileUtils.mkdir_p(paper_clip_path)
-    actual_path = paper_clip_path+self.name
+    actual_path = paper_clip_path+self.asset_file_name
     FileUtils.mv(self.temp_file_path,actual_path)
     self.asset = File.new(actual_path)
     self.save!
+    #self.convert_to_mp4
    end
  end 
 end

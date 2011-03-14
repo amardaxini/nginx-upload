@@ -2,6 +2,7 @@ VideoShare::Application.routes.draw do
   resources :videos do
 	  member do
      get 'download'
+     get 'play'
 	  end
 	  
   end

@@ -48,6 +48,22 @@ class VideosController < ApplicationController
     end
   end
 
+  def show
+		@video = Video.find(params[:id])
+  end
+
+	def	play
+   @video = Video.find(params[:id])
+   if @video.asset_content_type !='video/mp4'
+    response.headers['X-Accel-Redirect'] = "/attachments/videos/#{@video.id}/#{@video.asset_file_name}.mp4"
+   else
+     response.headers['X-Accel-Redirect'] = "/attachments/videos/#{@video.id}/#{@video.asset_file_name}"
+   end
+   response.headers['Content-Type']  = 'video/mp4'
+   response.headers['Content-Disposition'] = "inline;filename=#{@video.asset_file_name}"
+   render :nothing => true
+
+  end
   def download
    @video = Video.find(params[:id])
    response.headers['X-Accel-Redirect'] = "/attachments"+@video.asset.url.split("?").first

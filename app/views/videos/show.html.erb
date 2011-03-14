@@ -1,0 +1,23 @@
+<%=javascript_include_tag "video" %>
+<%= stylesheet_link_tag  "video-js"%>
+
+  <script type="text/javascript">
+    VideoJS.setupAllWhenReady();
+  </script>
+  <!-- Begin VideoJS -->
+  <div class="video-js-box">
+    <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+    <video id="example_video_1" class="video-js" width="640" height="264" controls="controls" preload="auto">
+     <source src="<%= play_video_path(@video) %>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+     <source src="<%= play_video_path(@video) %>" type='video/ogg; codecs="theora, vorbis"' />
+       <!-- Flash Fallback. Use any flash video player here. Make sure to keep the vjs-flash-fallback class. -->
+      <object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="264" type="application/x-shockwave-flash" data="/flash/flowplayer-3.2.7.swf">
+        <param name="movie" value="/flash/flowplayer-3.2.7.swf" />
+        <param name="allowfullscreen" value="true" />
+        <param name="flashvars" value='config={"playlist":[{"url": "<%= play_video_path(@video) %>","autoPlay":false,"autoBuffering":true}]}' />
+       </object>
+    </video>
+ </div>
+<p class="vjs-no-video"><strong>Download Video:</strong>
+ <%= link_to "Download",download_video_path(@video) %>
+</p>

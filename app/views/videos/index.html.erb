@@ -4,6 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Play</th>
     <th>Destroy</th>
   </tr>
 
@@ -11,6 +12,7 @@
   <tr>
     <td><%=link_to video.name,download_video_path(video) %></td>
     <td><%=video.description %></td>
+    <td><%=link_to video.name,video_path(video) %></td>
     <td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
