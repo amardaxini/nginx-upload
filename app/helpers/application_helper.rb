@@ -1,4 +1,9 @@
 module ApplicationHelper
+	def flash_messages
+		[:notice, :warning, :message, :error].collect do |key|
+			content_tag(:div, flash[key], :class => "flash_#{key}") unless flash[key].blank?
+		end.join
+	end
 	def clearing_span
 		content_tag(:span, '', :class => 'clear')
 	end
@@ -25,8 +30,7 @@ module ApplicationHelper
 	def active_class
 		classes = {
 						'home' => 'home',
-						"registrations.edit" =>'home',
-						"registrations.new" =>'register',
+						"users" =>'users',
 						"sessions.new"=>"login",
 		        "videos"=>"video"
 		}

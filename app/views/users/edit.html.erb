@@ -1,0 +1,37 @@
+<h2>Edit <%= @user.email.to_s.humanize %></h2>
+
+<%= form_for(@user, :html => { :method => :put,:class=>'data-form'} ) do |f| %>
+ <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <p><%= f.label :email %><br />
+      <%= f.text_field :email %></p>
+
+    <p><%= f.label :name %><br />
+      <%= f.text_field :name %></p>
+
+    <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password %></p>
+
+    <p><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %></p>
+
+    <p><%= f.label :admin %><br />
+      <%= f.check_box :admin %></p>
+
+    <p><%= f.submit "Update" %></p>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%#= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

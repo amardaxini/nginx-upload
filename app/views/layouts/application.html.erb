@@ -17,11 +17,11 @@
       <div id="login_bar_right" class="grid_3 prefix_13">
         <ul>
           <% if !current_user.blank? %>
-            <li><%=link_to "Profile  ", edit_user_registration_path,:class=>'profile',:user_id=>current_user.email %> </li>
-            <li><%= link_to "Logout",  destroy_user_session_path%></li>
-         <% else %>
-            <li><%= link_to "Register ", new_user_registration_path %></li>
-            <li><%= link_to "Login  ", new_user_session_path %></li>
+            <li><%=link_to "Profile  ", edit_user_path(current_user),:class=>'profile',:user_id=>current_user.email %> </li>
+            <li><%= link_to "Logout",  logout_path%></li>
+          <% else %>
+            <li><%#= link_to "Register ", new_user_registration_path %></li>
+            <li><%= link_to "Login  ", login_path %></li>
           <% end %>
         </ul>
       </div>
@@ -33,10 +33,12 @@
         <ul>
           <li class="active_class" id="home"><%= link_to "Home", root_url,:class=>active_class %></li>
           <% if current_user.blank? %>
-            <li class="active_class" id="login"><%= link_to "Login", new_user_session_path,:class=>active_class %></li>
-            <li class="active_class" id="register"><%= link_to "Register ", new_user_registration_path,:class=>active_class %></li>
+            <li class="active_class" id="login"><%= link_to "Login", login_path,:class=>active_class %></li>
           <% else %>
-             <li class="active_class" id="video"><%= link_to "Videos", videos_path ,:class=>active_class%></li>
+            <li class="active_class" id="video"><%= link_to "Videos", videos_path ,:class=>active_class%></li>
+            <% if can? :create, User %>
+              <li class="active_class" id="users"><%= link_to "Users ", users_path,:class=>active_class %></li>
+            <% end %>
           <% end %>
         </ul>
       </div>
@@ -48,6 +50,7 @@
   <%= clearing_span %>
   <div id="content" >
     <div id="main_content" class="<%= main_content_css_class%>">
+      <%=raw flash_messages %>
       <%= yield %>
 
     </div>
@@ -71,7 +74,7 @@
     {
       $(".active_class").removeClass('active');
       var active_id = $(".active_class:first a").attr('class');
-      
+
       $(".active_class").each(function(){
         if($(this).attr('id')==active_id)
         {

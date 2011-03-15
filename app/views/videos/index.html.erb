@@ -5,8 +5,11 @@
       <%= submit_tag "Search"%>
     <% end %>
   </div>
+
   <div class="grid_4">
-    <%= link_to 'Add Asset', new_video_path,:class=>"button" %>
+     <% if can? :create, Video %>   
+      <%= link_to 'Add Asset', new_video_path,:class=>"button" %>
+     <% end %>
   </div>
   <%= clearing_span %>
 
