@@ -1,23 +1,28 @@
-<h1>Listing videos</h1>
+<div class="add-asset">
+  <div class="grid_12" id="search_form">
+    <%= form_tag(videos_path(),:method=>:get) do %>
+     <strong> Search : </strong><%= text_field_tag :search %>
+      <%= submit_tag "Search"%>
+    <% end %>
+  </div>
+  <div class="grid_4">
+    <%= link_to 'Add Asset', new_video_path,:class=>"button" %>
+  </div>
+  <%= clearing_span %>
 
-<table class="listing">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Play</th>
-    <th>Destroy</th>
-  </tr>
+  <div class="add-asset" style="float:right"><%= will_paginate @videos %></div>
+</div>
 
+<hr class="separator" />
 <% @videos.each do |video| %>
-  <tr>
-    <td><%=link_to video.name,download_video_path(video) %></td>
-    <td><%=video.description %></td>
-    <td><%=link_to video.name,video_path(video) %></td>
-    <td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <div class="asset">
+    <div class="asset-title"><strong><%= video.name %></strong> : <%= video.asset_file_name %></div>
+    <div class="asset-description"><%= video.description %>
+
+    </div>
+    <p class="download-link">Download :<%=link_to video.asset_file_name,download_video_path(video) %></p>
+  </div>
+  <hr class="separator" />
 <% end %>
-</table>
 
-<br />
 
-<%= link_to 'New Video', new_video_path %>

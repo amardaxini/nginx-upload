@@ -11,10 +11,11 @@
     </div>
   <% end %>
  <div class="field">
-  Name: <%= text_field_tag "name" %>
+  <label>Name:</label> <br />
+   <%= text_field_tag "name" %>
   </div>
  <div class="field">
-  Description: <%= text_area_tag "description" %>
+  <label>Description:</label><br /> <%= text_area_tag "description" %>
   </div>
   <div class="field">
  <%= file_field_tag :asset %>

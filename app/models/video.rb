@@ -6,7 +6,8 @@ class Video < ActiveRecord::Base
   #validates_attachment_content_type :video,
 	# :content_type => ['application/x-shockwave-flash', 'application/x-shockwave-flash', 'application/flv', 'video/x-flv','video/quicktime','video/mp4']
 	#after_create :move_to_path
-  attr_accessor :temp_file_path 
+  attr_accessor :temp_file_path
+	scope :by_name_or_description, lambda{|search_param| where("name = ? or asset_file_name = ? or description = ?",search_param,search_param,search_param) unless search_param.blank?}
  
 	def convert_to_mp4
 		if self.asset_content_type != "video/mp4"

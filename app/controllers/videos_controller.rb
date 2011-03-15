@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.xml
   def index
-    @videos = Video.all
+    @videos = Video.by_name_or_description(params[:search]).paginate(:page => params[:page], :per_page => 15)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @videos }

@@ -4,6 +4,7 @@ gem 'rails', '3.0.3'
 gem  'devise'
 gem  'paperclip'
 gem  'mimetype-fu',:require=>'mimetype_fu'
+gem "will_paginate","3.0.pre2"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
