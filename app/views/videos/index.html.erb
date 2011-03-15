@@ -1,15 +1,15 @@
 <div class="add-asset">
   <div class="grid_12" id="search_form">
     <%= form_tag(videos_path(),:method=>:get) do %>
-     <strong> Search : </strong><%= text_field_tag :search %>
+      <strong> Search : </strong><%= text_field_tag :search %>
       <%= submit_tag "Search"%>
     <% end %>
   </div>
 
   <div class="grid_4">
-     <% if can? :create, Video %>   
+    <% if can? :create, Video %>
       <%= link_to 'Add Asset', new_video_path,:class=>"button" %>
-     <% end %>
+    <% end %>
   </div>
   <%= clearing_span %>
 
@@ -23,7 +23,12 @@
     <div class="asset-description"><%= video.description %>
 
     </div>
-    <p class="download-link">Download :<%=link_to video.asset_file_name,download_video_path(video) %></p>
+    <p class="download-link">
+      <strong>Download :</strong><%=link_to video.asset_file_name,download_video_path(video) %>
+      <% if can? :destroy, Video %>
+        <strong>Delete:</strong> <%= link_to image_tag("close_16.png"), video,:method=>:delete,:confirm=>"Are You sure"%>
+      <% end %>
+    </p>
   </div>
   <hr class="separator" />
 <% end %>
